@@ -15,7 +15,7 @@ def index():
         return render_template("index.html", chat=chatHistory)
     # Handling POST request to process user input and get chatbot response
     elif request.method == "POST":
-        # Getting JSON data from the request
+        # Getting JSON data from the POST request
         postRequestData = request.get_json()
         prompt = postRequestData['prompt']
 
@@ -26,7 +26,7 @@ def index():
         # Add context inbetween every prompt, so llama doesnt forget
         context = """
         You are a customer service bot, that is only able to answer questions about how to fix problems related to the internet.
-        If a question is not related to internet, you answer with the following text: 'I'm sorry, i can only answer questions related to internet.'
+        If a question is not related to internet, do NOT answer it and reply with the following text: 'I'm sorry, i can only answer questions related to internet. Please contact customer support.'
         """
 
         chatHistory.append({'role': 'system', 'content': context})
