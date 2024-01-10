@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="inital-scale=1, width=device-width" />
+    <title>Customer Support</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat">
+        {% for message in chat %} {%if message.role != "system"%}
+        <div
+          class="{{ message['role'] }} chat__message"
+          style="margin-bottom: 20px"
+        >
+          {{ message['content'] }}<br />
+        </div>
+        {% endif %} {% endfor %}
+      </div>
+      <form class="form">
+        <div class="input-container">
+          <input
+            class="input"
+            type="text"
+            name="prompt"
+            autocomplete="off"
+            placeholder="Type your question here"
+            autofocus
+          /><button class="button">
+            <img
+              src="{{url_for('static', filename='img/arrow-icon.png')}}"
+              alt="arrow icon"
+              class="enter-icon"
+              width="20px"
+            />
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+  </body>
+</html>
